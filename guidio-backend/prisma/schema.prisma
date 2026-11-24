@@ -1,0 +1,213 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  clerkId   String   @unique
+  email     String   @unique
+  firstName String?
+  lastName  String?
+  imageUrl  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  profile                  StudentProfile?
+  assistantConversations   AssistantConversation[]
+  careerPlans              CareerPlan[]
+  skillGapReports          SkillGapReport[]
+  interviewSessions        InterviewSession[]
+  weeklyReadinessReminders WeeklyReadinessReminder[]
+}
+
+model StudentProfile {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId          String   @unique @db.ObjectId
+  education       String?
+  college         String?
+  degree          String?
+  graduationYear  Int?
+  experienceLevel String?
+  targetRole      String?
+  skills          String[]
+  interests       String[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AssistantConversation {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  title     String   @default("New conversation")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user     User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages AssistantMessage[]
+
+  @@index([userId])
+  @@index([userId, updatedAt])
+}
+
+model AssistantMessage {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  conversationId String   @db.ObjectId
+  role           String
+  content        String
+  createdAt      DateTime @default(now())
+
+  conversation AssistantConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId])
+  @@index([conversationId, createdAt])
+}
+
+model CareerPlan {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId           String   @db.ObjectId
+  targetRole       String?
+  primaryRole      String
+  alternativeRoles String[]
+  summary          String
+  readinessScore   Int
+  strengths        String[]
+  prioritySkills   String[]
+  roadmap          Json
+  projects         Json
+  interviewTopics  String[]
+  advice           String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([createdAt])
+  @@index([userId, createdAt])
+}
+
+model SkillGapReport {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String   @db.ObjectId
+  targetRole        String
+  matchPercentage   Int
+  currentStrengths  String[]
+  missingSkills     Json
+  prioritySkills    String[]
+  learningPlan      Json
+  projectIdeas      Json
+  summary           String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([targetRole])
+  @@index([createdAt])
+  @@index([userId, createdAt])
+}
+
+model InterviewSession {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId          String   @db.ObjectId
+  interviewType   String
+  targetRole      String
+  difficulty      String
+  status          String   @default("IN_PROGRESS")
+  totalQuestions  Int      @default(5)
+  currentQuestion Int      @default(1)
+  overallScore    Int?
+  summary         String?
+  strengths       String[]
+  improvements    String[]
+  startedAt       DateTime @default(now())
+  completedAt     DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user               User                         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  questions          InterviewQuestion[]
+  improvementSummary InterviewImprovementSummary?
+
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+  @@index([userId, createdAt])
+  @@index([userId, status])
+}
+
+model InterviewQuestion {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionId   String   @db.ObjectId
+  question    String
+  questionType String
+  order       Int
+  idealAnswer String?
+  createdAt   DateTime @default(now())
+
+  session InterviewSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  answer  InterviewAnswer?
+
+  @@index([sessionId])
+  @@unique([sessionId, order])
+}
+
+model InterviewAnswer {
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  questionId         String   @unique @db.ObjectId
+  answerText         String
+  overallScore       Int
+  technicalScore     Int
+  communicationScore Int
+  structureScore     Int
+  confidenceScore    Int
+  relevanceScore     Int
+  strengths          String[]
+  improvements       String[]
+  feedback           String
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  question InterviewQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+}
+
+model InterviewImprovementSummary {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionId   String   @unique @db.ObjectId
+  title       String
+  summary     String
+  actionItems String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  session InterviewSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+model WeeklyReadinessReminder {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String   @db.ObjectId
+  weekKey     String
+  title       String
+  message     String
+  actionLabel String
+  actionHref  String
+  isRead      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, weekKey])
+  @@index([userId])
+  @@index([createdAt])
+  @@index([userId, createdAt])
+  @@index([userId, isRead])
+}

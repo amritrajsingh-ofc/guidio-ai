@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Environment files (keep only the .example files)
+.env
+.env.*
+!.env.example
+*.local
+
+# Build output
+dist/
+dist-ssr/
+build/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Generated
+server/src/generated/prisma
+
+# Editors and OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db

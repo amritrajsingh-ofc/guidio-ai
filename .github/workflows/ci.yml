@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  backend:
+    name: Backend Tests & Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: 'guidio-backend/package-lock.json'
+      - name: Install dependencies
+        run: cd guidio-backend && npm ci
+      - name: Generate Prisma Client
+        run: cd guidio-backend && npx prisma generate
+      - name: Lint
+        run: cd guidio-backend && npm run lint
+      - name: Test
+        run: cd guidio-backend && npm test
+
+  frontend:
+    name: Frontend Build & Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: 'guidio-frontend/package-lock.json'
+      - name: Install dependencies
+        run: cd guidio-frontend && npm ci
+      - name: Lint
+        run: cd guidio-frontend && npm run lint
+      - name: Build
+        env:
+          VITE_API_BASE_URL: http://localhost:5000
+          VITE_CLERK_PUBLISHABLE_KEY: pk_test_dummy
+        run: cd guidio-frontend && npm run build

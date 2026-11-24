@@ -1,0 +1,36 @@
+services:
+  - type: web
+    name: guidio-ai-api
+    runtime: node
+    plan: free
+    rootDir: guidio-backend
+    buildCommand: npm ci && npx prisma generate
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production
+      - key: CORS_ORIGINS
+        value: https://guidio-ai.vercel.app
+      - key: GEMINI_MODEL
+        value: gemini-3.8-flash
+      - key: GROQ_MODEL
+        value: openai/gpt-oss-120b
+      - key: AI_PROVIDER_ORDER
+        value: gemini,groq
+      - key: DATABASE_URL
+        sync: false
+      - key: CLERK_SECRET_KEY
+        sync: false
+      - key: CLERK_PUBLISHABLE_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: INNGEST_EVENT_KEY
+        sync: false
+      - key: INNGEST_SIGNING_KEY
+        sync: false

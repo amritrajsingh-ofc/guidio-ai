@@ -1,0 +1,45 @@
+{
+  "name": "guidio-ai-server",
+  "version": "1.1.0",
+  "description": "Guidio AI Express backend",
+  "main": "src/server.js",
+  "type": "module",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "test": "node --test tests/ai-layer.test.js tests/reliability.test.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "build": "prisma generate",
+    "db:push": "prisma db push"
+  },
+  "keywords": [
+    "guidio-ai",
+    "express",
+    "clerk",
+    "prisma",
+    "mongodb"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "@clerk/express": "^2.1.90",
+    "@google/genai": "^2.20.0",
+    "@prisma/client": "6.19",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^5.0.0",
+    "express-rate-limit": "^8.7.0",
+    "helmet": "^8.0.0",
+    "inngest": "^4.18.1",
+    "prisma": "6.19",
+    "zod": "^4.5.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.9.0",
+    "globals": "^17.11.0"
+  }
+}

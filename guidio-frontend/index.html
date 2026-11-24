@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <!-- Set from the site's saved theme by the script below -->
+    <meta name="theme-color" content="#050505" />
+
+    <title>Guidio AI — Your Personal AI Career Companion</title>
+    <meta
+      name="description"
+      content="Guidio AI is a free AI career companion for students: skill gap analysis, career guidance, mock interviews and an AI assistant."
+    />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph (read by Facebook, LinkedIn, WhatsApp and others) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Guidio AI" />
+    <meta property="og:title" content="Guidio AI — Your Personal AI Career Companion" />
+    <meta
+      property="og:description"
+      content="Guidio AI is a free AI career companion for students: skill gap analysis, career guidance, mock interviews and an AI assistant."
+    />
+    <meta property="og:image" content="https://guidio-ai.vercel.app/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Guidio AI: your personal AI career companion for skill gap analysis, career guidance and mock interviews."
+    />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Guidio AI — Your Personal AI Career Companion" />
+    <meta
+      name="twitter:description"
+      content="Guidio AI is a free AI career companion for students: skill gap analysis, career guidance, mock interviews and an AI assistant."
+    />
+    <meta name="twitter:image" content="https://guidio-ai.vercel.app/og-image.png" />
+    <meta
+      name="twitter:image:alt"
+      content="Guidio AI: your personal AI career companion for skill gap analysis, career guidance and mock interviews."
+    />
+
+    <!-- Applies the saved theme before first paint to avoid a light/dark flash.
+         Must match ThemeProvider: same storage key, same default, light/dark only.
+         It also sets the browser bar color (theme-color) to match. -->
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var theme = "dark";
+
+        try {
+          var stored = localStorage.getItem("Guidio-Ai-theme");
+          if (stored === "light" || stored === "dark") theme = stored;
+        } catch (error) {
+          // Storage can be unavailable (private mode). The dark default stays.
+        }
+
+        root.classList.add(theme);
+        root.style.colorScheme = theme;
+
+        var bar = document.querySelector('meta[name="theme-color"]');
+        if (bar) bar.setAttribute("content", theme === "dark" ? "#050505" : "#ffffff");
+      })();
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <noscript>
+      <div style="max-width: 40rem; margin: 4rem auto; padding: 0 1rem; font-family: system-ui, sans-serif; line-height: 1.6;">
+        <h1>Guidio AI</h1>
+        <p>
+          Guidio AI is a free AI career companion for students, with skill gap
+          analysis, career guidance, mock interviews and an AI assistant.
+        </p>
+        <p>Please turn on JavaScript in your browser to use Guidio AI.</p>
+      </div>
+    </noscript>
+
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
