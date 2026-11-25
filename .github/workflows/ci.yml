@@ -21,6 +21,8 @@ jobs:
       - name: Install dependencies
         run: cd guidio-backend && npm ci
       - name: Generate Prisma Client
+        env:
+          DATABASE_URL: mongodb://localhost:27017/guidio-test
         run: cd guidio-backend && npx prisma generate
       - name: Lint
         run: cd guidio-backend && npm run lint
