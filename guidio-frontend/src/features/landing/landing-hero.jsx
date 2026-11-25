@@ -210,7 +210,7 @@ export function LandingHero() {
             Four tools in one place
           </p>
 
-          <ul className="flex flex-wrap justify-center gap-2">
+          <ul className="flex flex-wrap justify-center gap-2 max-w-full">
             {features.map((feature) => {
               const Icon = feature.icon;
 
@@ -218,7 +218,7 @@ export function LandingHero() {
                 <li key={feature.id}>
                   <a
                     href="#features"
-                    className="flex items-center gap-2 rounded-full bg-muted px-3.5 py-2 text-xs font-medium tracking-tight text-foreground outline-none transition-colors hover:bg-foreground hover:text-background focus-visible:ring-2 focus-visible:ring-ring/60 sm:text-[0.8125rem]"
+                    className="flex items-center gap-2 rounded-full bg-muted px-3.5 py-2 text-xs font-medium tracking-tight text-foreground outline-none transition-colors hover:bg-foreground hover:text-background focus-visible:ring-2 focus-visible:ring-ring/60 sm:text-[0.8125rem] whitespace-nowrap"
                   >
                     <Icon aria-hidden="true" className="size-3.5" />
                     {feature.title}

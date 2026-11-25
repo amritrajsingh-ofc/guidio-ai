@@ -1,0 +1,18 @@
+{
+  "name": "Guidio AI",
+  "short_name": "Guidio AI",
+  "description": "Free AI career companion for students with skill gap analysis, career guidance, mock interviews and AI assistant",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#050505",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

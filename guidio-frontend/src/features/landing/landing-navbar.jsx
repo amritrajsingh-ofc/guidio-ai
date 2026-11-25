@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useAuth } from "@clerk/react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, X } from "lucide-react";
 import { Logo } from "@/components/common/logo";
 import { ModeToggle } from "@/components/mode-toggle";
 import {
@@ -278,6 +278,14 @@ export function LandingNavbar() {
                 <SheetDescription className="sr-only">
                   Navigate around the Guidio AI home page.
                 </SheetDescription>
+                <button
+                  type="button"
+                  onClick={() => setMenuOpen(false)}
+                  aria-label="Close menu"
+                  className="flex size-10 items-center justify-center rounded-full text-foreground/80 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 lg:hidden"
+                >
+                  <X className="size-5" aria-hidden="true" />
+                </button>
               </SheetHeader>
 
               <nav

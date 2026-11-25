@@ -4,6 +4,7 @@ import { ClerkProvider } from "@clerk/react";
 import { BrowserRouter } from "react-router";
 import App from "./App";
 import { ThemeProvider } from "@/app/theme-provider";
+import { ToastProvider } from "@/components/ui/toast";
 import "@/styles/globals.css";
 
 const clerkPublishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
@@ -25,7 +26,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         signUpFallbackRedirectUrl="/dashboard"
       >
         <ThemeProvider defaultTheme="dark" storageKey="Guidio-Ai-theme">
-          <App />
+          <ToastProvider>
+            <App />
+          </ToastProvider>
         </ThemeProvider>
       </ClerkProvider>
     </BrowserRouter>

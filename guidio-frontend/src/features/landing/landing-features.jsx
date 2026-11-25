@@ -131,12 +131,12 @@ export function LandingFeatures() {
       </div>
 
       {/* Tile row: bleeds to the screen edge, starts aligned with the heading */}
-      <div ref={rowRef} className="mt-10 sm:mt-14">
+      <div ref={rowRef} className="mt-10 sm:mt-14 overflow-x-clip">
         <ul
           ref={trackRef}
           role="list"
           onScroll={updateArrows}
-          className="flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain px-[var(--edge)] pb-2 [--edge:calc((100%_-_min(100%,_72rem))_/_2_+_clamp(1rem,_4vw,_2rem))] [scrollbar-width:none] scroll-pl-[var(--edge)] [&::-webkit-scrollbar]:hidden"
+          className="flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain px-[var(--edge)] pb-2 [--edge:calc((100%_-_min(100%,_72rem))_/_2_+_clamp(1rem,_4vw,_2rem))] [scrollbar-width:none] scroll-pl-[var(--edge)] [&::-webkit-scrollbar]:hidden max-w-full"
         >
           {features.map((feature, index) => {
             const Icon = feature.icon;

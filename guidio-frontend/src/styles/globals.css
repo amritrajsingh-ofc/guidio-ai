@@ -158,6 +158,28 @@
     /* Safety net against accidental sideways scroll.
        Layouts must still be built so they never overflow. */
     overflow-x: clip;
+    /* Ensure no horizontal scroll on mobile */
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  /* Ensure all containers respect viewport width */
+  .container {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Fix any potential horizontal scroll from sections */
+  section {
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: clip;
+  }
+
+  /* Ensure all grid and flex containers don't overflow */
+  [class*="grid"], [class*="flex"] {
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   h1,

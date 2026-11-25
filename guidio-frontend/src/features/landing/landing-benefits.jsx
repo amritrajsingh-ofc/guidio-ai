@@ -56,7 +56,7 @@ export function LandingBenefits() {
 
   return (
     <section id="benefits" className="scroll-mt-20 py-16 sm:py-24">
-      <div className="container max-w-6xl">
+      <div className="container max-w-6xl overflow-x-clip">
         <SectionHeading
           eyebrow="Why Guidio AI"
           title="Stop guessing what to do next."
@@ -65,7 +65,7 @@ export function LandingBenefits() {
 
         <div
           ref={gridRef}
-          className="mt-10 grid gap-3 sm:mt-14 sm:grid-cols-2 sm:gap-4 lg:grid-cols-6"
+          className="mt-10 grid gap-3 sm:mt-14 sm:grid-cols-2 sm:gap-4 lg:grid-cols-6 max-w-full"
         >
           {regular.map((benefit, index) => {
             const Icon = benefit.icon;

@@ -47,7 +47,7 @@ export function LandingCta() {
   }, []);
 
   return (
-    <section className="container max-w-6xl pb-16 sm:pb-24">
+    <section id="cta" className="container max-w-6xl pb-16 sm:pb-24 scroll-mt-20">
       <div
         ref={cardRef}
         className={cn(

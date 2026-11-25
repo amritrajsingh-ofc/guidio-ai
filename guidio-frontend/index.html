@@ -12,8 +12,13 @@
       name="description"
       content="Guidio AI is a free AI career companion for students: skill gap analysis, career guidance, mock interviews and an AI assistant."
     />
+    <meta name="keywords" content="AI career guidance, skill gap analysis, mock interview practice, student career tools, AI career coach" />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Open Graph (read by Facebook, LinkedIn, WhatsApp and others) -->
     <meta property="og:type" content="website" />
@@ -31,6 +36,7 @@
       property="og:image:alt"
       content="Guidio AI: your personal AI career companion for skill gap analysis, career guidance and mock interviews."
     />
+    <meta property="og:url" content="https://guidio-ai.vercel.app" />
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -44,6 +50,30 @@
       name="twitter:image:alt"
       content="Guidio AI: your personal AI career companion for skill gap analysis, career guidance and mock interviews."
     />
+
+    <!-- JSON-LD Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Guidio AI",
+      "description": "Free AI career companion for students with skill gap analysis, career guidance, mock interviews and AI assistant",
+      "url": "https://guidio-ai.vercel.app",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "AI Student Assistant",
+        "Skill Gap Analysis",
+        "Career Guidance",
+        "Mock Interview Practice"
+      ]
+    }
+    </script>
 
     <!-- Applies the saved theme before first paint to avoid a light/dark flash.
          Must match ThemeProvider: same storage key, same default, light/dark only.

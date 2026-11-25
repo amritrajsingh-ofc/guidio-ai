@@ -63,7 +63,7 @@ function HomePage() {
     // overflow-x-clip stops big faded icons and the swipe row from causing
     // sideways scroll on phones. Unlike overflow-hidden, it keeps the
     // sticky tiles in the Journey section working.
-    <div className="min-h-screen overflow-x-clip bg-background text-foreground">
+    <div className="min-h-screen overflow-x-clip bg-background text-foreground max-w-full">
       <SkipLink />
 
       <LandingNavbar />

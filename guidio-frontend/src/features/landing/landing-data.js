@@ -20,6 +20,7 @@ export const navLinks = [
   { label: "How it works", id: "how-it-works" },
   { label: "Journey", id: "journey" },
   { label: "FAQ", id: "faq" },
+  { label: "Get Started", id: "cta" },
 ];
 
 /**

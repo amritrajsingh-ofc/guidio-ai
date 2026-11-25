@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { ArrowUp, ArrowUpRight, Heart } from "lucide-react";
+import { ArrowUp, ArrowUpRight, Heart, Mail, Phone } from "lucide-react";
 import { Link } from "react-router";
 
 import { AiUsageNotice } from "@/components/common/ai-usage-notice";
@@ -23,8 +23,16 @@ const legalLinks = [
   { label: "Terms and Conditions", to: "/terms" },
 ];
 
+const contactLinks = [
+  { label: "guidio.ai@gmail.com", href: "mailto:guidio.ai@gmail.com", icon: Mail },
+  { label: "+91 XXXXX XXXXX", href: "tel:+91XXXXXXXXXX", icon: Phone },
+];
+
 const linkClass =
   "group inline-flex items-center gap-1 text-[0.8125rem] tracking-[-0.01em] text-muted-foreground transition-colors duration-200 hover:text-foreground focus-visible:text-foreground focus-visible:outline-none";
+
+const contactLinkClass =
+  "group inline-flex items-center gap-2 text-[0.8125rem] tracking-[-0.01em] text-muted-foreground transition-colors duration-200 hover:text-foreground focus-visible:text-foreground focus-visible:outline-none";
 
 function scrollToTop() {
   const reduceMotion = window.matchMedia(
@@ -34,7 +42,7 @@ function scrollToTop() {
   window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
 }
 
-function FooterColumn({ title, links }) {
+function FooterColumn({ title, links, renderLink }) {
   return (
     <div>
       <h3 className="text-xs font-semibold tracking-tight text-foreground">
@@ -43,24 +51,35 @@ function FooterColumn({ title, links }) {
 
       <ul role="list" className="mt-4 space-y-2.5">
         {links.map((link) => (
-          <li key={link.label}>
-            {link.to ? (
-              <Link to={link.to} className={linkClass}>
-                {link.label}
-                <ArrowUpRight
-                  aria-hidden="true"
-                  className="size-3 -translate-x-1 opacity-0 transition-[transform,opacity] duration-200 motion-reduce:transition-none group-hover:translate-x-0 group-hover:opacity-100"
-                />
-              </Link>
-            ) : (
-              <a href={link.href} className={linkClass}>
-                {link.label}
-              </a>
+          <li key={link.label || link.href}>
+            {renderLink ? renderLink(link) : (
+              link.to ? (
+                <Link to={link.to} className={linkClass}>
+                  {link.label}
+                  <ArrowUpRight
+                    aria-hidden="true"
+                    className="size-3 -translate-x-1 opacity-0 transition-[transform,opacity] duration-200 motion-reduce:transition-none group-hover:translate-x-0 group-hover:opacity-100"
+                  />
+                </Link>
+              ) : (
+                <a href={link.href} className={linkClass}>
+                  {link.label}
+                </a>
+              )
             )}
           </li>
         ))}
       </ul>
     </div>
+  );
+}
+
+function ContactLink({ label, href, icon: Icon }) {
+  return (
+    <a href={href} className={contactLinkClass}>
+      <Icon aria-hidden="true" className="size-4 shrink-0" />
+      <span>{label}</span>
+    </a>
   );
 }
 
@@ -93,10 +112,21 @@ export const LandingFooter = memo(function LandingFooter() {
         </div>
 
         {/* Link columns */}
-        <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 border-t border-foreground/10 pt-10 sm:grid-cols-3">
+        <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 border-t border-foreground/10 pt-10 sm:grid-cols-4">
           <FooterColumn title="Explore" links={productLinks} />
           <FooterColumn title="Account" links={accountLinks} />
           <FooterColumn title="Legal" links={legalLinks} />
+          <FooterColumn
+            title="Contact"
+            links={contactLinks}
+            renderLink={(link) => (
+              <ContactLink
+                label={link.label}
+                href={link.href}
+                icon={link.icon}
+              />
+            )}
+          />
         </div>
 
         {/* AI usage notice */}
